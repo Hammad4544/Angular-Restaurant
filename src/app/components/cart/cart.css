@@ -1,0 +1,28 @@
+.bg-secondary {
+  background-color: #1a1a1a !important; /* لون غامق جداً ومريح للعين */
+}
+
+.card {
+  transition: all 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.4) !important;
+}
+
+/* نضمن إن الأرقام تبقى بيضاء */
+.text-white {
+  color: #ffffff !important;
+}
+
+/* زرار المسح */
+.btn-link:hover {
+  transform: scale(1.2);
+  color: #ff0000 !important;
+}
+
+/* التباعد بين السطور في الملخص */
+.sticky-top {
+  z-index: 1000;
+}

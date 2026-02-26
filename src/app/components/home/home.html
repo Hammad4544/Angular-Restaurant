@@ -1,0 +1,63 @@
+<header class="hero-section d-flex align-items-center text-center text-white">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 mx-auto">
+        <h1 class="display-2 fw-bold mb-3">Savor Every Bite</h1>
+        <p class="lead mb-5 fs-4 text-light">Discover the finest ingredients and authentic flavors crafted by world-class chefs.</p>
+        <div class="d-grid gap-3 d-sm-flex justify-content-sm-center">
+          <a href="#menu" class="btn btn-warning btn-lg px-5 fw-bold py-3 shadow">Order Now</a>
+          <a href="#" class="btn btn-outline-light btn-lg px-5 py-3">Explore Menu</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section class="py-5 bg-dark" id="menu">
+  <div class="container">
+    <div class="text-center mb-5">
+      <h2 class="fw-bold text-white">Our <span class="text-warning">Branches</span></h2>
+      <div class="bg-warning mx-auto" style="height: 4px; width: 60px;"></div>
+    </div>
+
+    <div class="row g-4">
+      @for (branch of branches; track branch.id) {
+        <div class="col-md-4">
+          <div class="card h-100 border-0 shadow-lg branch-card bg-secondary text-white overflow-hidden">
+            
+            <div class="position-relative">
+              <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?q=80&w=500" class="card-img p-2" [alt]="branch.name" style="height: 200px; object-fit: cover; border-radius: 20px;">
+              
+              @if (branch.isOpen) {
+                <span class="badge bg-success position-absolute top-0 end-0 m-3 px-3 py-2">Open</span>
+              } @else {
+                <span class="badge bg-danger position-absolute top-0 end-0 m-3 px-3 py-2">Closed</span>
+              }
+            </div>
+
+            <div class="card-body">
+              <h4 class="card-title fw-bold text-warning">{{ branch.name }}</h4>
+              
+              <div class="branch-info mb-3">
+                <p class="mb-1"><i class="bi bi-geo-alt-fill text-warning me-2"></i> {{ branch.address }}</p>
+                <p class="mb-0"><i class="bi bi-telephone-fill text-warning me-2"></i> {{ branch.phone }}</p>
+              </div>
+
+              <button 
+                class="btn btn-warning w-100 fw-bold py-2 shadow-sm mt-auto" 
+                [disabled]="!branch.isOpen"
+                [routerLink]="['/menu', branch.id]">
+                {{ branch.isOpen ? 'Explore Menu' : 'Currently Unavailable' }}
+              </button>
+            </div>
+          </div>
+        </div>
+      } @empty {
+        <div class="col-12 text-center text-white py-5">
+          <div class="spinner-border text-warning mb-3"></div>
+          <p>Looking for our nearest branch...</p>
+        </div>
+      }
+    </div>
+  </div>
+</section>

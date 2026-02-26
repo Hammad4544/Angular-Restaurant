@@ -1,0 +1,38 @@
+.login-section {
+  min-height: 90vh; /* عشان يسيب مساحة للـ Navbar */
+  background-color: #0d0d0d;
+}
+
+.card {
+  background-color: #1a1a1a !important;
+  box-shadow: 0 15px 35px rgba(0,0,0,0.5) !important;
+}
+
+.bg-secondary {
+  background-color: #2c2c2c !important; /* لون الـ input */
+}
+
+.form-control:focus {
+  background-color: #252525 !important;
+  color: #fff;
+  border: 1px solid #ffc107 !important;
+  box-shadow: none;
+}
+
+.btn-warning {
+  transition: all 0.3s ease;
+}
+
+.btn-warning:hover:not(:disabled) {
+  background-color: #e5ac00;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(255, 193, 7, 0.3);
+}
+
+.x-small {
+  font-size: 0.75rem;
+}
+
+::placeholder {
+  color: rgba(255, 255, 255, 0.2) !important;
+}

@@ -1,0 +1,18 @@
+.menu-card {
+  transition: all 0.4s ease;
+  border-radius: 20px !important;
+}
+
+.menu-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 12px 24px rgba(255, 193, 7, 0.2) !important;
+}
+
+.bg-secondary {
+  background-color: #212529 !important; /* لون غامق فخم */
+}
+
+.badge {
+  font-size: 1rem;
+  padding: 8px 15px;
+}

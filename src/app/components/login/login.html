@@ -1,0 +1,70 @@
+<section class="login-section d-flex align-items-center justify-content-center">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-5 col-lg-4">
+        <div class="card bg-dark text-white border-0 shadow-lg rounded-4 overflow-hidden">
+          <div class="card-body p-5">
+            
+            <div class="text-center mb-4">
+              <h2 class="fw-bold text-warning">Welcome Back</h2>
+              <p class="text-white-50 small">Login to your <span class="text-warning fw-bold">RESTO-MAGIC</span> account</p>
+            </div>
+
+            <form (ngSubmit)="onSubmit()" #loginForm="ngForm">
+              
+              <div class="mb-3">
+                <label for="email" class="form-label small text-warning">Email Address</label>
+                <input 
+                  type="email" 
+                  class="form-control bg-secondary border-0 text-white py-2" 
+                  id="email" 
+                  name="email" 
+                  [(ngModel)]="loginDto.Email" 
+                  placeholder="name@example.com"
+                  required
+                  email
+                  #emailVar="ngModel">
+                
+                <div *ngIf="emailVar.invalid && emailVar.touched" class="text-danger x-small mt-1">
+                  <span *ngIf="emailVar.errors?.['required']"><i class="bi bi-exclamation-circle me-1"></i>Email is required.</span>
+                  <span *ngIf="emailVar.errors?.['email']"><i class="bi bi-exclamation-circle me-1"></i>Enter a valid email.</span>
+                </div>
+              </div>
+
+              <div class="mb-4">
+                <label for="password" class="form-label small text-warning">Password</label>
+                <input 
+                  type="password" 
+                  class="form-control bg-secondary border-0 text-white py-2" 
+                  id="password" 
+                  name="password" 
+                  [(ngModel)]="loginDto.Password" 
+                  placeholder="********"
+                  required
+                  #passVar="ngModel">
+                
+                <div *ngIf="passVar.invalid && passVar.touched" class="text-danger x-small mt-1">
+                  <i class="bi bi-exclamation-circle me-1"></i>Password is required.
+                </div>
+              </div>
+
+              <button 
+                type="submit" 
+                class="btn btn-warning w-100 py-2 fw-bold rounded-pill shadow mb-3" 
+                [disabled]="loginForm.invalid">
+                LOG IN
+              </button>
+
+              <div class="text-center mt-2">
+                <p class="small text-white-50">New here? 
+                  <a routerLink="/register" class="text-warning text-decoration-none fw-bold">Create Account</a>
+                </p>
+              </div>
+            </form>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

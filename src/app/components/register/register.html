@@ -1,0 +1,53 @@
+<section class="register-section d-flex align-items-center justify-content-center">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-5">
+        <div class="card bg-dark text-white border-0 shadow-lg rounded-4 overflow-hidden">
+          <div class="card-body p-5">
+            <div class="text-center mb-4">
+              <h2 class="fw-bold text-warning">Create Account</h2>
+              <p class="text-white-50">Join <span class="text-warning fw-bold">RESTO-MAGIC</span> family</p>
+            </div>
+
+            <form #registerForm="ngForm" (ngSubmit)="onSubmit()">
+              <div class="mb-3">
+                <label class="form-label small text-warning">Full Name</label>
+                <input type="text" name="FullName" class="form-control bg-secondary border-0 text-white py-2" 
+                       [(ngModel)]="registerdto.FullName" placeholder="Hammad .." required>
+              </div>
+
+              <div class="mb-3">
+                <label class="form-label small text-warning">Email Address</label>
+                <input type="email" name="Email" class="form-control bg-secondary border-0 text-white py-2" 
+                       [(ngModel)]="registerdto.Email" placeholder="example@mail.com" required>
+              </div>
+
+              <div class="mb-3">
+                <label class="form-label small text-warning">Phone Number</label>
+                <input type="text" name="PhoneNumber" class="form-control bg-secondary border-0 text-white py-2" 
+                       [(ngModel)]="registerdto.PhoneNumber" placeholder="01xxxxxxxxx" required>
+              </div>
+
+              <div class="mb-4">
+                <label class="form-label small text-warning">Password</label>
+                <input type="password" name="Password" class="form-control bg-secondary border-0 text-white py-2" 
+                       [(ngModel)]="registerdto.Password" placeholder="••••••••" required>
+              </div>
+
+              <button type="submit" [disabled]="registerForm.invalid" 
+                      class="btn btn-warning w-100 fw-bold py-2 mb-3 rounded-pill shadow">
+                SIGN UP
+              </button>
+
+              <div class="text-center">
+                <p class="small text-white-50">Already have an account? 
+                  <a routerLink="/login" class="text-warning text-decoration-none fw-bold">Login Here</a>
+                </p>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
