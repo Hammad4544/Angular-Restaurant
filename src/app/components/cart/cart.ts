@@ -2,6 +2,7 @@ import { Component, OnInit, inject } from '@angular/core';
 import { ICart } from '../../Interfaces/ICart/ICart';
 import { CommonModule } from '@angular/common';
 import { CartService } from '../../services/CartServices/cart-service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-cart',
@@ -12,6 +13,7 @@ import { CartService } from '../../services/CartServices/cart-service';
 })
 export class Cart implements OnInit {
   private cartService = inject(CartService);
+  private router = inject(Router);
   cartData?: ICart;
   readonly imageBaseUrl = 'http://localhost:5161';
 
@@ -35,5 +37,22 @@ export class Cart implements OnInit {
   // ميثود مسح منتج
   removeItem(cartItemId: number) {
     this.cartService.removeFromCart(cartItemId).subscribe(() => this.loadCart());
+  }
+  OnCheckout(){
+    this.cartService.checkout().subscribe({
+      
+      next : (message)=>{
+        alert(message);
+        this.router.navigate(['/MyOrders']);
+      }
+      ,error: (err) =>{console.error(err);
+        alert('Checkout failed: ' + err.error);
+      } 
+    
+    }
+      
+    );
+  
+
   }
 }

@@ -5,6 +5,7 @@ import { ActivatedRoute, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common'; 
 import { CartService } from '../../services/CartServices/cart-service';
 import { Categoryservice } from '../../services/CategoryService/categoryservice';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-menu',
@@ -65,10 +66,20 @@ export class Menu implements OnInit {
   addCartItem(menuItem: IMenuItem){
     this.cartService.addToCart(menuItem.id,1).subscribe({
       next: (res) => {
-      alert(`${menuItem.name} added to cart!`); // ممكن تبدلها بـ Toast شيك بعدين
+      Swal.fire({
+        title: 'Added to Cart!',
+        text: `${menuItem.name} has been added successfully.`,
+        icon: 'success',
+        timer: 1500,
+        showConfirmButton: false,
+        background: '#1a1a1a', // لون الدارك بتاعنا
+        color: '#ffc107',
+        toast: true,
+        position: 'top-end'
+      }); 
     },
     error: (err) => {
-      if(err.status === 401) alert('Please login first!');
+      if(err.status === 401) Swal.fire('Login First!', 'You must be logged in to order.', 'warning');
       else console.error(err);
     }
 
