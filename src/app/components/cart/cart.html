@@ -1,73 +1,111 @@
 <section class="py-5 bg-dark min-vh-100 text-white">
   <div class="container">
     <div class="mb-5 border-bottom border-warning pb-3">
-      <h2 class="fw-bold"><i class="bi bi-cart-fill text-warning me-2"></i>Shopping <span class="text-warning">Cart</span></h2>
+      <h2 class="fw-bold"><i class="bi bi-cart-fill text-warning me-2"></i>Shopping <span
+          class="text-warning">Cart</span></h2>
     </div>
 
     @if (cartData && cartData.items.length > 0) {
-      <div class="row g-4">
-        <div class="col-lg-8">
-          @for (item of cartData.items; track item.cartItemId) {
-            <div class="card bg-secondary border-0 mb-3 shadow rounded-4 overflow-hidden text-white">
-              <div class="row g-0 align-items-center">
-                <div class="col-md-2 p-2">
-                  <img [src]="imageBaseUrl + item.imageUrl" class="img-fluid rounded-3" [alt]="item.menuItemName">
+    <div class="row g-4">
+      <div class="col-lg-8">
+        @for (item of cartData.items; track item.cartItemId) {
+        <div class="card bg-secondary border-0 mb-3 shadow rounded-4 overflow-hidden text-white">
+          <div class="row g-0 align-items-center">
+            <div class="col-md-2 p-2">
+              <img [src]="imageBaseUrl + item.imageUrl" class="img-fluid rounded-3" [alt]="item.menuItemName">
+            </div>
+            <div class="col-md-4 p-3">
+              <h5 class="fw-bold text-warning mb-1">{{ item.menuItemName }}</h5>
+              <p class="mb-0 opacity-75 small">{{ item.unitPrice }} EGP</p>
+            </div>
+            <div class="col-md-3 p-3 text-center">
+              <div class="d-flex align-items-center justify-content-center">
+                <button class="btn btn-sm btn-outline-warning"
+                  (click)="updateQty(item.cartItemId, item.quantity - 1)">-</button>
+                <span class="mx-3 fw-bold text-white fs-5">{{ item.quantity }}</span>
+                <button class="btn btn-sm btn-outline-warning"
+                  (click)="updateQty(item.cartItemId, item.quantity + 1)">+</button>
+              </div>
+            </div>
+            <div class="col-md-2 p-3 text-center">
+              <span class="fw-bold text-white">{{ item.itemTotal }} EGP</span>
+            </div>
+            <div class="col-md-1 p-3 text-end">
+              <button class="btn btn-link text-danger" (click)="removeItem(item.cartItemId)">
+                <i class="bi bi-trash3-fill"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+        }
+      </div>
+
+      <div class="col-lg-4">
+        <div class="card bg-secondary border-0 p-4 rounded-4 shadow-lg sticky-top" style="top: 20px;">
+          <h4 class="fw-bold text-warning mb-4 border-bottom border-dark pb-2">Order Summary</h4>
+          <div class="d-flex justify-content-between mb-2">
+            <span class="text-white-50">Subtotal:</span>
+            <span class="text-white fw-bold">{{ cartData.subTotal }} EGP</span>
+          </div>
+          <div class="d-flex justify-content-between mb-2">
+            <span class="text-white-50">Tax (14%):</span>
+            <span class="text-white fw-bold">{{ cartData.tax }} EGP</span>
+          </div>
+          <div class="d-flex justify-content-between mb-3 border-bottom border-dark pb-3">
+            <span class="text-white-50">Delivery:</span>
+            <span class="text-white fw-bold">{{ cartData.deliveryFee }} EGP</span>
+          </div>
+          <div class="d-flex justify-content-between mb-4">
+            <h5 class="fw-bold">Total:</h5>
+            <h5 class="fw-bold text-warning">{{ cartData.totalAmount }} EGP</h5>
+          </div>
+          <div class="payment-methods mb-4">
+            <p class="text-white-50 small fw-bold mb-3 uppercase">Select Payment Method</p>
+
+            <div class="row g-2">
+              <div class="col-4 text-center">
+                <div class="p-2 border rounded-3 cursor-pointer transition-all"
+                  [class.border-warning]="selectedPaymentMethod === '1'" [class.bg-dark]="selectedPaymentMethod === '1'"
+                  (click)="selectedPaymentMethod = '1'">
+                  <i class="bi bi-cash-stack fs-3 text-warning"></i>
+                  <p class="small mb-0 mt-1 text-white">Cash</p>
                 </div>
-                <div class="col-md-4 p-3">
-                  <h5 class="fw-bold text-warning mb-1">{{ item.menuItemName }}</h5>
-                  <p class="mb-0 opacity-75 small">{{ item.unitPrice }} EGP</p>
+              </div>
+
+              <div class="col-4 text-center">
+                <div class="p-2 border rounded-3 cursor-pointer transition-all"
+                  [class.border-warning]="selectedPaymentMethod === '2'" [class.bg-dark]="selectedPaymentMethod === '2'"
+                  (click)="selectedPaymentMethod = '2'">
+                  <i class="bi bi-phone-fill fs-3 text-danger"></i>
+                  <p class="small mb-0 mt-1 text-white">Wallet</p>
                 </div>
-                <div class="col-md-3 p-3 text-center">
-                  <div class="d-flex align-items-center justify-content-center">
-                    <button class="btn btn-sm btn-outline-warning" (click)="updateQty(item.cartItemId, item.quantity - 1)">-</button>
-                    <span class="mx-3 fw-bold text-white fs-5">{{ item.quantity }}</span>
-                    <button class="btn btn-sm btn-outline-warning" (click)="updateQty(item.cartItemId, item.quantity + 1)">+</button>
-                  </div>
-                </div>
-                <div class="col-md-2 p-3 text-center">
-                  <span class="fw-bold text-white">{{ item.itemTotal }} EGP</span>
-                </div>
-                <div class="col-md-1 p-3 text-end">
-                  <button class="btn btn-link text-danger" (click)="removeItem(item.cartItemId)">
-                    <i class="bi bi-trash3-fill"></i>
-                  </button>
+              </div>
+
+              <div class="col-4 text-center">
+                <div class="p-2 border rounded-3 cursor-pointer transition-all"
+                  [class.border-warning]="selectedPaymentMethod === '3'" [class.bg-dark]="selectedPaymentMethod === '3'"
+                  (click)="selectedPaymentMethod = '3'">
+                  <i class="bi bi-bank fs-3 text-info"></i>
+                  <p class="small mb-0 mt-1 text-white">InstaPay</p>
                 </div>
               </div>
             </div>
-          }
-        </div>
-
-        <div class="col-lg-4">
-          <div class="card bg-secondary border-0 p-4 rounded-4 shadow-lg sticky-top" style="top: 20px;">
-            <h4 class="fw-bold text-warning mb-4 border-bottom border-dark pb-2">Order Summary</h4>
-            <div class="d-flex justify-content-between mb-2">
-              <span class="text-white-50">Subtotal:</span>
-              <span class="text-white fw-bold">{{ cartData.subTotal }} EGP</span>
-            </div>
-            <div class="d-flex justify-content-between mb-2">
-              <span class="text-white-50">Tax (14%):</span>
-              <span class="text-white fw-bold">{{ cartData.tax }} EGP</span>
-            </div>
-            <div class="d-flex justify-content-between mb-3 border-bottom border-dark pb-3">
-              <span class="text-white-50">Delivery:</span>
-              <span class="text-white fw-bold">{{ cartData.deliveryFee }} EGP</span>
-            </div>
-            <div class="d-flex justify-content-between mb-4">
-              <h5 class="fw-bold">Total:</h5>
-              <h5 class="fw-bold text-warning">{{ cartData.totalAmount }} EGP</h5>
-            </div>
-            <button (click)="OnCheckout()" class="btn btn-warning w-100 fw-bold py-3 rounded-pill shadow">
-              Proceed to Checkout
-            </button>
           </div>
+
+          <button (click)="OnCheckout(selectedPaymentMethod)" [disabled]="!selectedPaymentMethod"
+            class="btn btn-warning w-100 fw-bold py-3 rounded-pill shadow mt-2">
+            CONFIRM & PLACE ORDER <i class="bi bi-arrow-right-circle ms-2"></i>
+          </button>
+         
         </div>
       </div>
+    </div>
     } @else {
-      <div class="text-center py-5">
-        <i class="bi bi-cart-x display-1 text-muted opacity-50"></i>
-        <h3 class="mt-4 text-white">Your cart is empty!</h3>
-        <button class="btn btn-warning mt-3 px-5 py-2 fw-bold rounded-pill" routerLink="/home">Order Now</button>
-      </div>
+    <div class="text-center py-5">
+      <i class="bi bi-cart-x display-1 text-muted opacity-50"></i>
+      <h3 class="mt-4 text-white">Your cart is empty!</h3>
+      <button class="btn btn-warning mt-3 px-5 py-2 fw-bold rounded-pill" routerLink="/home">Order Now</button>
+    </div>
     }
   </div>
 </section>

@@ -1,0 +1,25 @@
+/* الكانتينر الأساسي لازم يغطي الشاشة كلها */
+:host {
+    display: block;
+    background-color: #0c0c0c; /* نفس درجة اللون اللي فوق */
+    min-height: 100vh; /* عشان يملأ الشاشة حتى لو مفيش أوردرات كتير */
+    color: white;
+}
+
+.container {
+    background-color: #0c0c0c !important;
+}
+
+/* ظبط شكل الجدول عشان يندمج مع الخلفية */
+.table-responsive {
+    border: 1px solid #333; /* حدود خفيفة بدل الأبيض */
+    border-radius: 12px;
+    background-color: #1a1a1a; /* درجة أفتح سيكة عشان الجدول يظهر */
+}
+
+/* التاريخ شكله طويل ومزعج، هنظبطه في الـ HTML بالـ Pipe */
+.status-badge.Pending {
+    background-color: rgba(255, 193, 7, 0.1); /* أصفر شفاف */
+    color: #ffc107;
+    border: 1px solid #ffc107;
+}

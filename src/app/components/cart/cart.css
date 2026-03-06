@@ -26,3 +26,20 @@
 .sticky-top {
   z-index: 1000;
 }
+.cursor-pointer {
+    cursor: pointer;
+}
+
+.transition-all {
+    transition: all 0.3s ease;
+}
+
+.payment-methods .border {
+    border-color: #444 !important;
+}
+
+.payment-methods .border-warning {
+    border-color: #ffc107 !important;
+    transform: translateY(-3px);
+    box-shadow: 0 4px 15px rgba(255, 193, 7, 0.2);
+}

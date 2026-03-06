@@ -26,8 +26,11 @@ export class CartService {
     return this.http.delete(`${this.apiUrl}/remove/${cartItemId}`);
   }
 
-  checkout(){
-    return this.http.post(`${this.apiUrl}/checkout`,{},{responseType: 'text'});
+  checkout(PaymentMethod:string){
+
+   let Method = parseInt(PaymentMethod);
+
+    return this.http.post(`${this.apiUrl}/checkout?method=${Method}`,{});
   }
 
 

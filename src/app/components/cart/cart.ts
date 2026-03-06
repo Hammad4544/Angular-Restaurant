@@ -15,6 +15,7 @@ export class Cart implements OnInit {
   private cartService = inject(CartService);
   private router = inject(Router);
   cartData?: ICart;
+  selectedPaymentMethod: string = '1';
   readonly imageBaseUrl = 'http://localhost:5161';
 
   ngOnInit() {
@@ -38,8 +39,8 @@ export class Cart implements OnInit {
   removeItem(cartItemId: number) {
     this.cartService.removeFromCart(cartItemId).subscribe(() => this.loadCart());
   }
-  OnCheckout(){
-    this.cartService.checkout().subscribe({
+  OnCheckout(method : string){
+    this.cartService.checkout(method).subscribe({
       
       next : (message)=>{
         alert(message);

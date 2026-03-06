@@ -1,0 +1,51 @@
+<div class="container py-5">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h2 class="text-white fw-bold">My <span class="text-warning">Orders</span></h2>
+    <span class="badge bg-warning text-dark">{{ orders.length }} Total Orders</span>
+  </div>
+
+  <div class="table-responsive shadow-lg rounded-3">
+    <table class="table table-dark table-hover align-middle mb-0">
+      <thead class="table-light text-dark">
+        <tr>
+          <th class="py-3">Order ID</th>
+          <th class="py-3">Date</th>
+          <th class="py-3">Branch</th>
+          <th class="py-3">Items</th>
+          <th class="py-3">Payment</th>
+          <th class="py-3">Status</th>
+          <th class="py-3">Total</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (order of orders; track order.orderId) {
+        <tr class="border-bottom border-secondary">
+          <td class="fw-bold text-warning">#{{ order.orderId }}</td>
+          <td>{{ order.createdAt | date:'dd/MM/yyyy' }}</td>
+          <td>{{ order.branchName }}</td>
+          <td>
+            <div class="small">
+              @for (item of order.items; track item.menuItemId) {
+                <div>{{ item.quantity }}x {{ item.menuItemName }}</div>
+              }
+            </div>
+          </td>
+          <td><i class="bi bi-wallet2 me-1"></i> {{ order.paymentMethod }}</td>
+          <td>
+            <span class="badge border {{ getStatusClass(order.status) }} bg-transparent px-3 py-2">
+              {{ order.status }}
+            </span>
+          </td>
+          <td class="fw-bold">{{ order.totalPrice | number:'1.2-2' }} EGP</td>
+        </tr>
+        } @empty {
+        <tr>
+          <td colspan="7" class="text-center py-5 text-muted">
+            No orders found yet.
+          </td>
+        </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+</div>
