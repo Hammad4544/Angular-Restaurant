@@ -17,3 +17,13 @@ export interface IOrderItem {
   itemTotal: number;
   imageUrl: string | null;
 }
+export interface IAdminOrder {
+  orderId: number;
+  user: string; 
+  branchName: string;
+  totalPrice: number;
+  status: string;
+  createdAt: string;
+  paymentMethod: string;
+  items: IOrderItem[];
+}
